@@ -1,3 +1,4 @@
+//library for audio player
 import ddf.minim.spi.*;
 import ddf.minim.signals.*;
 import ddf.minim.*;
@@ -5,15 +6,19 @@ import ddf.minim.analysis.*;
 import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
+//declaring data
 ArrayList<Float> spideyData;
+
+//Audio player data
 Minim minim;
 AudioPlayer player;
 AudioMetaData meta;
-PImage img;
 
+PImage img;
 
 int firstYear = 1966;
 
+//controlp5 library
 import controlP5.*;
 ControlP5 cp5;
 
@@ -34,16 +39,19 @@ void setup()
   cp5.addButton("muteMusic").setValue(4).setPosition(400, 20).setSize(80,20).setLabel("Mute Music");
   cp5.addButton("menu").setValue(5).setPosition(500, 20).setSize(80,20).setLabel("Menu");
 
+  //playing audio
   minim = new Minim(this);
   player = minim.loadFile("spidey.mp3", 2048);
   player.loop();
   
+  //loading image for menu
   img = loadImage("Spi3.jpg");
   image(img, 0, 0);
   image(img, 0, 0, width, height);
   
   border = 0.1 * width;
   
+  //finding highest data value
   highest = spideyData.get(0);
   for (int i = 1 ; i < spideyData.size() ; i ++)
     {
@@ -52,17 +60,17 @@ void setup()
     }
 }
 
-boolean menu = true;
-
 void draw()
 {
 }
 
+//muting music
 void muteMusic()
 {
   player.mute();
 }
 
+//loading the data
 void loadData() {
   
   spideyData = new ArrayList<Float>();
@@ -74,7 +82,7 @@ void loadData() {
   }
 }
 
-
+//drawing the axis for scatter graph and line graph
 void drawAxis()
 {
   stroke(200, 200, 200);
@@ -96,11 +104,9 @@ void drawAxis()
   {
     
     float x = border + (i * horizontalWindowGap);
-    line(x, height - (border - tickSize)
-         , x, (height - border));
+    line(x, height - (border - tickSize), x, (height - border));
     float textY = height - (border * 0.5f);
 
-    
     textAlign(CENTER, CENTER);
     text((int)(firstYear + i*horizontalDataGap) , x, textY);//4.2
   }
@@ -122,13 +128,17 @@ void drawAxis()
   }
 }
 
+//drawing the trend(line) graph
 void drawTrendGraph() 
 {
+  //reseting the background
   background(0);
   drawAxis();
   float maxValue = highest;
   
   stroke(255);
+  
+  //mapping the data onto the graph
   for (int i = 1 ; i < spideyData.size() ; i ++)
   {
     float x1 = map(i-1, 0, spideyData.size(), border, width - border);
@@ -145,6 +155,8 @@ void drawScatter ()
   drawAxis();
   float maxValue = highest;
   stroke(255);
+  
+  //mapping the data onto the graph
   for (int i = 1 ; i < spideyData.size() ; i ++)
   {
     float x1 = map(i-1, 0, spideyData.size(), border, width - border);
@@ -161,6 +173,8 @@ void drawCircles()
   float maxValue = highest;
   stroke(0);
   fill(255,0,0);
+  
+  //declaring variables needed to rotate the circles as they are drawn
   float theta;
   float radius = 250;
   float cx = width/2;
@@ -169,6 +183,8 @@ void drawCircles()
   float y = 0;
   text("Spider-man over the years", cx+50, cy); 
   float lastX, lastY;
+  
+  //drawing circles
   for(int i = 1 ; i < spideyData.size() ; i ++)
   {
     theta = ((TWO_PI)/spideyData.size()* i );
@@ -193,6 +209,7 @@ void drawCircles()
   
 }
 
+//re-drawing the image for the menu
 void menu()
 {
   image(img, 0, 0);
@@ -201,4 +218,3 @@ void menu()
 
  
   
-
