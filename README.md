@@ -10,7 +10,7 @@ The complete assignment is a system of methods called by controlp5 buttons.
 There is a line graph, a scatter plot and a graph of my own creation which shows the 
 amount of comics shown in a clockwise spiral in circles relative to the amount of comics sold.
 
-[alt tag](circlg.png)
-[alt tag](lineg.png)
-[alt tag](menu.png)
-[alt tag](scatg.png)
+![alt tag](https://github.com/JayH117/Assignment-1/blob/master/circlg.PNG)
+[alt tag](https://github.com/JayH117/Assignment-1/blob/master/lineg.PNG)
+[alt tag](https://github.com/JayH117/Assignment-1/blob/master/menu.PNG)
+[alt tag](https://github.com/JayH117/Assignment-1/blob/master/scatg.PNG)
